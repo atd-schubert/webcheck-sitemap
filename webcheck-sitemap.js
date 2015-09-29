@@ -158,7 +158,7 @@ var SitemapPlugin = function (opts) {
                             url: $elem.find('loc').text()
                         }, function (err) {
                             if (err) {
-                                self.onError(err);
+                                self.onError(err, result);
                             }
                         });
                     }
@@ -170,7 +170,7 @@ var SitemapPlugin = function (opts) {
 
         result.response.on('end', function () {
             if (type === 'index' || type === 'map') {
-                self.onData(sitemap);
+                self.onData(sitemap, result);
             }
         });
 
@@ -187,11 +187,21 @@ SitemapPlugin.prototype = {
      * @type {{}}
      */
     sitemap: {},
-    onError: function (err) {
-        console.error(err);
+    /**
+     *
+     * @param {error} err - Error that was thrown
+     * @param {webcheck.result} result - Webcheck result object
+     */
+    onError: function (err, result) {
+        console.error(err, result.url);
     },
-    onData: function (data) {
-        console.warn('Warning: Do not handle sitemap data', data);
+    /**
+     *
+     * @param {{}} data - Sitemap data
+     * @param {webcheck.result} result - Webcheck result object
+     */
+    onData: function (data, result) {
+        console.warn('Warning: Do not handle sitemap data from ' + result.url, data);
     }
 };
 

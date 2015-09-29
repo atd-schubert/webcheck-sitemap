@@ -91,3 +91,7 @@ onData gives you the json parsed representation of the sitemap.
 }
 
 ```
+
+## Working with onData
+
+onData gives you the the result of the mapped data (named as data) and the result of the crawl (named as result).
