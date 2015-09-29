@@ -155,7 +155,10 @@ var SitemapPlugin = function (opts) {
 
                     if (opts.follow) {
                         self.handle.crawl({
-                            url: $elem.find('loc').text()
+                            url: $elem.find('loc').text(),
+                            parameters: {
+                                sitemap: true
+                            }
                         }, function (err) {
                             if (err) {
                                 self.onError(err, result);
